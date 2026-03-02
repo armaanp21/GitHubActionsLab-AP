@@ -1,0 +1,55 @@
+name: Workflow 3 - Multi-Platform Testing
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  ubuntu-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Print OS info
+        run: |
+          echo "Runner OS: $RUNNER_OS"
+          uname -a
+
+      - name: Create and display a file
+        run: |
+          echo "Hello from Ubuntu job" > ubuntu.txt
+          cat ubuntu.txt
+
+  macos-job:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Print OS info
+        run: |
+          echo "Runner OS: $RUNNER_OS"
+          uname -a
+
+      - name: Create and display a file
+        run: |
+          echo "Hello from macOS job" > macos.txt
+          cat macos.txt
+
+  windows-job:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Print OS info
+        run: |
+          echo "Runner OS: $env:RUNNER_OS"
+          systeminfo
+
+      - name: Create and display a file
+        run: |
+          "Hello from Windows job" | Out-File -FilePath windows.txt
+          Get-Content windows.txt
